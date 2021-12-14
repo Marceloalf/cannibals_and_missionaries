@@ -22,6 +22,14 @@ class Border:
             "missionaries": self.missionaries + missionaries
         }
 
+    def is_valid(self):
+        if self.cannibals == 0 or self.missionaries == 0:
+            return True
+        elif self.cannibals > self.missionaries:
+            return False
+        else:
+            return True
+
 
 class Status:
     def __init__(self, cannibals_left=3, missionaries_left=3, boat="left"):
