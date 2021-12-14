@@ -10,11 +10,39 @@ POSSIBLE_MOVES = [
 ]
 
 
-def possibilities(status):
+def possibilities(status, priority_list, visited):
+    visited.append(status.representation())
+
     for movements in POSSIBLE_MOVES:
-        s = move(status, *movements)
+        new_status = move(status, *movements)
+
+        if new_status and new_status.is_valid() and not invalid_status(new_status, priority_list, visited):
+            priority_list.append(new_status)
 
 
-initial_status = Status()
-possibilities(initial_status)
+def invalid_status(status, priority_list, visited):
+    if not status:
+        return True
 
+    elif status.representation() in visited:
+        return True
+
+    else:
+        for priority in priority_list:
+            if status.representation() == priority.representation():
+                return True
+
+
+def main():
+    visited = []
+    priority_list = [Status()]
+
+    while priority_list:
+        priority = priority_list.pop(0)
+        print(priority)
+        print()
+        possibilities(priority, priority_list, visited)
+
+
+if __name__ == '__main__':
+    main()
