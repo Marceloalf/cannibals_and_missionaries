@@ -10,15 +10,6 @@ class Border:
         # Helps the debug
         return f"Canibais: {self.cannibals}, missionários: {self.missionaries}"
 
-    def representation(self):
-        """
-        It will help later on the priority list of status
-        """
-        return {
-            "cannibals": self.cannibals,
-            "missionaries": self.missionaries
-        }
-
     def leave(self, cannibals, missionaries):
         return {
             "cannibals": self.cannibals - cannibals,
@@ -40,6 +31,12 @@ class Status:
         self.border_left = Border(cannibals_left, missionaries_left)
         self.border_right = Border(3 - cannibals_left, 3 - missionaries_left)
         self.boat = boat
+
+    def representation(self):
+        return {
+            "right_border": [self.border_right.cannibals, self.border_right.missionaries],
+            "left_border": [self.border_left.cannibals, self.border_left.missionaries],
+        }
 
 
 def move(status, cannibals, missionaries):
