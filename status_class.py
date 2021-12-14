@@ -95,5 +95,5 @@ def not_enough_people(status, border, cannibals, missionaries):
     if border == "right":
         return status.border_right.cannibals < cannibals or status.border_right.missionaries < missionaries
 
-    elif border == "right":
+    elif border == "left":
         return status.border_left.cannibals < cannibals or status.border_left.missionaries < missionaries
