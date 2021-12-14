@@ -72,12 +72,12 @@ def move(status, cannibals, missionaries):
     if cant_move(cannibals, missionaries):
         return
 
-    if status.boat == "right":
+    if status.boat == "right" and not not_enough_people(status, status.boat, cannibals, missionaries):
         border_left = status.border_left.arrive(cannibals, missionaries)
 
         return Status(border_left["cannibals"], border_left["missionaries"], "left")
 
-    elif status.boat == "left":
+    elif status.boat == "left" and not not_enough_people(status, status.boat, cannibals, missionaries):
         border_left = status.border_left.leave(cannibals, missionaries)
 
         return Status(border_left["cannibals"], border_left["missionaries"], "right")
@@ -88,3 +88,11 @@ def cant_move(cannibals, missionaries):
     If the boat have more than 2 people or have no people at all, it can't move
     """
     return (cannibals + missionaries > 2) or (cannibals + missionaries < 1)
+
+
+def not_enough_people(status, border, cannibals, missionaries):
+    if border == "right":
+        return status.border_right.cannibals < cannibals or status.border_right.missionaries < missionaries
+
+    elif border == "right":
+        return status.border_left.cannibals < cannibals or status.border_left.missionaries < missionaries
