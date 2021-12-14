@@ -46,6 +46,9 @@ class Status:
             "left_border": [self.border_left.cannibals, self.border_left.missionaries],
         }
 
+    def is_valid(self):
+        return self.border_right.is_valid() and self.border_left.is_valid()
+
 
 def move(status, cannibals, missionaries):
     """
