@@ -23,6 +23,10 @@ class Border:
         }
 
     def is_valid(self):
+        """
+        Verify if the border is valid
+        :return: the only case forbidden is when cannibals > (missionaries != 0)
+        """
         if self.cannibals == 0 or self.missionaries == 0:
             return True
         elif self.cannibals > self.missionaries:
@@ -47,6 +51,10 @@ class Status:
         }
 
     def is_valid(self):
+        """
+        Verify if both borders in this status are valid
+        :return: True if both are valid
+        """
         return self.border_right.is_valid() and self.border_left.is_valid()
 
 
