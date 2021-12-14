@@ -48,6 +48,7 @@ class Status:
         return {
             "right_border": [self.border_right.cannibals, self.border_right.missionaries],
             "left_border": [self.border_left.cannibals, self.border_left.missionaries],
+            "boat": self.boat
         }
 
     def is_valid(self):
