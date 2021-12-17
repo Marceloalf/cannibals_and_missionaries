@@ -16,20 +16,21 @@ def possibilities(status, priority_list, visited):
     for movements in POSSIBLE_MOVES:
         new_status = move(status, *movements)
 
-        if new_status and new_status.is_valid() and not invalid_status(new_status, priority_list, visited):
+        if new_status and \
+           new_status.is_valid() \
+           and not status_already_verified(status, new_status, priority_list, visited, movements):
+
             priority_list.append(new_status)
 
 
-def invalid_status(status, priority_list, visited):
-    if not status:
+def status_already_verified(status, new_status, priority_list, visited, movement):
+    if new_status.representation() in visited:
+        status.add_adjacency({"node": new_status, "weight": movement})
         return True
-
-    elif status.representation() in visited:
-        return True
-
     else:
         for priority in priority_list:
-            if status.representation() == priority.representation():
+            if new_status.representation() == priority.representation():
+                status.add_adjacency({"node": new_status, "weight": movement})
                 return True
 
 
