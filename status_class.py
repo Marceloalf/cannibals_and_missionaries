@@ -64,6 +64,10 @@ class Status:
         """
         return self.border_right.is_valid() and self.border_left.is_valid()
 
+    def add_adjacency(self, edge):
+        if edge not in self.adjacency:
+            self.adjacency.append(edge)
+
     def __repr__(self):
         return f"right_border: {self.border_right}\nleft_border: {self.border_left}"
 
