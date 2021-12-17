@@ -40,9 +40,15 @@ class Status:
         """
         The standard status begins with everyone and the boat on the left border.
         """
+
+        # Border information
         self.border_left = Border(cannibals_left, missionaries_left)
         self.border_right = Border(3 - cannibals_left, 3 - missionaries_left)
         self.boat = boat
+
+        # Graph information
+        self.adjacency = []
+        self.visited = False
 
     def representation(self):
         return {
