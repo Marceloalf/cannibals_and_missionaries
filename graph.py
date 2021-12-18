@@ -13,9 +13,12 @@ class Graph:
 
     def visit(self, node):
         for adjacency in node.adjacency:
-            self.visit(adjacency)
+            self.visit(adjacency["node"])
+        print(node)
+        print()
 
     def depth_search(self):
+        print("-------------- Path --------------")
         self.visit(self.objective)
 
 

@@ -1,4 +1,5 @@
 from status_class import *
+from graph import *
 
 
 POSSIBLE_MOVES = [
@@ -10,7 +11,7 @@ POSSIBLE_MOVES = [
 ]
 
 
-def possibilities(status, priority_list, visited):
+def possibilities(status, priority_list, visited, graph):
     visited.append(status.representation())
 
     for movements in POSSIBLE_MOVES:
@@ -22,6 +23,20 @@ def possibilities(status, priority_list, visited):
 
             new_status.add_adjacency({"node": status, "weight": movements})
             priority_list.append(new_status)
+            graph.append_nodes(new_status)
+
+            defining_objective_status(new_status, graph)
+
+
+def defining_objective_status(status, graph):
+    objective = {
+            "right_border": [3, 3],
+            "left_border": [0, 0],
+            "boat": "right"
+    }
+
+    if status.representation() == objective:
+        graph.objective = status
 
 
 def status_already_verified(status, new_status, priority_list, visited, movement):
@@ -39,11 +54,16 @@ def main():
     visited = []
     priority_list = [Status()]
 
+    graph = Graph()
+    graph.append_nodes(priority_list[0])
+
     while priority_list:
         priority = priority_list.pop(0)
         print(priority)
         print()
-        possibilities(priority, priority_list, visited)
+        possibilities(priority, priority_list, visited, graph)
+
+    graph.depth_search()
 
 
 if __name__ == '__main__':
