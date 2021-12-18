@@ -1,6 +1,7 @@
 class Graph:
     def __init__(self):
         self.nodes = []
+        self.objective = None
 
     def append_nodes(self, status):
         """
@@ -9,6 +10,13 @@ class Graph:
         """
         if not node_in_graph(status, self.nodes):
             self.nodes.append(status)
+
+    def visit(self, node):
+        for adjacency in node.adjacency:
+            self.visit(adjacency)
+
+    def depth_search(self):
+        self.visit(self.objective)
 
 
 def node_in_graph(status, graph):

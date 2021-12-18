@@ -20,17 +20,18 @@ def possibilities(status, priority_list, visited):
            new_status.is_valid() \
            and not status_already_verified(status, new_status, priority_list, visited, movements):
 
+            new_status.add_adjacency({"node": status, "weight": movements})
             priority_list.append(new_status)
 
 
 def status_already_verified(status, new_status, priority_list, visited, movement):
     if new_status.representation() in visited:
-        status.add_adjacency({"node": new_status, "weight": movement})
+        new_status.add_adjacency({"node": status, "weight": movement})
         return True
     else:
         for priority in priority_list:
             if new_status.representation() == priority.representation():
-                status.add_adjacency({"node": new_status, "weight": movement})
+                new_status.add_adjacency({"node": status, "weight": movement})
                 return True
 
 
