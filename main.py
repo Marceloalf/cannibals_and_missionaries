@@ -57,13 +57,15 @@ def main():
     graph = Graph()
     graph.append_nodes(priority_list[0])
 
+    graph.init = priority_list[0]
+
     while priority_list:
         priority = priority_list.pop(0)
-        print(priority)
-        print()
         possibilities(priority, priority_list, visited, graph)
 
-    graph.depth_search()
+    for path in graph.generate_path([graph.objective]):
+        for line in path[::-1]:
+            print(line)
 
 
 if __name__ == '__main__':
