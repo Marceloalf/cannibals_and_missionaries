@@ -2,6 +2,7 @@ class Graph:
     def __init__(self):
         self.nodes = []
         self.objective = None
+        self.init = None
 
     def append_nodes(self, status):
         """
@@ -11,15 +12,26 @@ class Graph:
         if not node_in_graph(status, self.nodes):
             self.nodes.append(status)
 
-    def visit(self, node):
-        for adjacency in node.adjacency:
-            self.visit(adjacency["node"])
-        print(node)
-        print()
+    def create_graph(self):
+        graph_representation = {}
 
-    def depth_search(self):
-        print("-------------- Path --------------")
-        self.visit(self.objective)
+        for node in self.nodes:
+            graph_representation[node] = []
+            for adjacency in node.adjacency:
+                graph_representation[node].append(adjacency["node"])
+
+        return graph_representation
+
+    def generate_path(self, path):
+        if path[-1] == self.init:
+            yield path
+            return
+
+        for adjacency in self.create_graph()[path[-1]]:
+            if adjacency in path:
+                continue
+            for bigger_path in self.generate_path(path + [adjacency]):
+                yield bigger_path
 
 
 def node_in_graph(status, graph):
