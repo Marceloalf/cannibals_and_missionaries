@@ -69,7 +69,7 @@ class Status:
             self.adjacency.append(edge)
 
     def __repr__(self):
-        return f"right_border: {self.border_right}\nleft_border: {self.border_left}"
+        return f"(right_border: {self.border_right} | left_border: {self.border_left} | boat: {self.boat})"
 
 
 def move(status, cannibals, missionaries):
