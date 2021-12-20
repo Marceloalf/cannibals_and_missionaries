@@ -1,3 +1,6 @@
+import pygame
+from pygame.locals import *
+from sys import exit
 from status_class import *
 from graph import *
 
@@ -9,6 +12,17 @@ POSSIBLE_MOVES = [
     (1, 0),
     (2, 0),
 ]
+
+MISSIONARIES_COLOR = (140, 140, 200)
+CANNIBALS_COLOR = (140, 0, 0)
+BOAT_COLOR = (120, 64, 8)
+BASE_RADIUS = 30
+RIVER_COLOR = (0, 119, 190)
+GRASS_COLOR = (86, 125, 70)
+
+CAPTION = 'Missionarios e Canibais'
+
+SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 
 
 def possibilities(status, priority_list, visited, graph):
@@ -56,7 +70,7 @@ def search_weight(from_, to_):
             return adjacency["weight"]
 
 
-def main():
+def get_solution_path():
     visited = []
     priority_list = [Status()]
 
