@@ -112,6 +112,12 @@ def run(paths):
                 pygame.quit()
                 exit()
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    final = False
+                    init = 0
+                    boat_position = 300
+
         if final:
             pygame.display.update()
             screen.fill(GRASS_COLOR)
